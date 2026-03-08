@@ -98,6 +98,83 @@ left:0;
 from {
 transform:scale(1.05);
 opacity:0.9;
+}. The HTML Structure
+You'll want a container that holds the background and a content div for any text or buttons you want to overlay.
+
+HTML
+<header class="hero-section">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1 class="hero-title">LEVEL IX</h1>
+      <p class="hero-subtitle">The Next Level of Digital Media</p>
+      <a href="#about" class="hero-btn">Explore Now</a>
+    </div>
+  </div>
+</header>
+2. The CSS Styling
+This CSS handles the "glassy" dark aesthetic and ensures the background image covers the entire screen properly.
+
+CSS
+.hero-section {
+  position: relative;
+  height: 100vh; /* Full screen height */
+  width: 100%;
+  background: url('Gemini_Generated_Image_s5dhwgs5dhwgs5dh.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* Dark overlay to make text pop and match the "dark city" vibe */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Adjust transparency as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  font-family: 'Inter', sans-serif; /* A clean, modern font */
+}
+
+.hero-title {
+  font-size: 5rem;
+  letter-spacing: 12px;
+  font-weight: 200;
+  margin-bottom: 0;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.hero-btn {
+  padding: 12px 30px;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #ffffff;
+  color: #000000;
 }
 to {
 transform:scale(1);
