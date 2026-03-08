@@ -33,7 +33,7 @@ justify-content:center;
 align-items:center;
 z-index:9999;
 opacity:1;
-transition:opacity 0.8s ease-out 2s;
+transition:opacity 0.8s ease-out 3.5s;
 }
 
 .loading-screen.fade-out {
@@ -81,15 +81,46 @@ animation:softGlow 6s ease-in-out infinite;
 width:100%;
 height:100%;
 object-fit:cover;
-animation:cinematicZoom 4s ease-out forwards;
+animation:cinematicZoom 2.8s ease-out forwards;
 position:relative;
 z-index:2;
+opacity:0;
+}
+
+.spotlight-image.fade-in {
+animation:imageEnter 0.8s ease-out forwards;
+}
+
+.spotlight-image.fade-out {
+animation:imageExit 0.8s ease-in forwards;
+}
+
+@keyframes imageEnter {
+from {
+opacity:0;
+transform:scale(1.05);
+}
+to {
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes imageExit {
+from {
+opacity:1;
+transform:scale(1);
+}
+to {
+opacity:0;
+transform:scale(0.98);
+}
 }
 
 @keyframes cinematicZoom {
 from {
 transform:scale(1.1);
-opacity:0.7;
+opacity:0;
 }
 to {
 transform:scale(1);
@@ -103,7 +134,7 @@ letter-spacing:3px;
 color:rgba(192,192,192,0.6);
 text-transform:uppercase;
 margin-bottom:15px;
-animation:fadeInDown 1s ease-out 0.5s both;
+animation:fadeInDown 0.8s ease-out 0.3s both;
 }
 
 .spotlight-name {
@@ -111,14 +142,14 @@ font-size:32px;
 letter-spacing:2px;
 color:#e0e0e0;
 margin-bottom:5px;
-animation:fadeInUp 1s ease-out 0.7s both;
+animation:fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .spotlight-city {
 font-size:16px;
 color:rgba(176,176,176,0.7);
 letter-spacing:1px;
-animation:fadeInUp 1s ease-out 0.9s both;
+animation:fadeInUp 0.8s ease-out 0.7s both;
 }
 
 .loading-footer {
@@ -127,7 +158,7 @@ bottom:40px;
 font-size:13px;
 color:rgba(192,192,192,0.4);
 letter-spacing:1px;
-animation:fadeIn 1.5s ease-out 1.5s both;
+animation:fadeIn 0.8s ease-out 2.5s both;
 }
 
 @keyframes fadeInDown {
@@ -165,6 +196,29 @@ transition:opacity 0.8s ease-out;
 }
 
 .gallery-section.visible {
+opacity:1;
+}
+
+.gallery-section.midnight-mode {
+background:#000;
+color:#e0e0e0;
+}
+
+.midnight-indicator {
+position:fixed;
+top:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:12px;
+letter-spacing:2px;
+color:rgba(255,165,0,0.6);
+text-transform:uppercase;
+z-index:100;
+opacity:0;
+transition:opacity 0.5s ease;
+}
+
+.midnight-indicator.show {
 opacity:1;
 }
 
@@ -283,6 +337,15 @@ border-color:rgba(100,200,255,0.4);
 box-shadow:0 0 15px rgba(100,200,255,0.15);
 }
 
+.gallery-section.midnight-mode .card {
+border-color:#1a1a1a;
+}
+
+.gallery-section.midnight-mode .card:hover {
+border-color:rgba(100,200,255,0.6);
+box-shadow:0 0 20px rgba(100,200,255,0.25);
+}
+
 .card img {
 width:100%;
 }
@@ -348,14 +411,17 @@ padding:40px 20px;
 <div class="loading-screen" id="loadingScreen">
 <div class="loading-container">
 <div class="spotlight-frame">
-<img class="spotlight-image" id="spotlightImage" src="https://picsum.photos/300/400" alt="Spotlight Provider">
+<img class="spotlight-image" id="spotlightImage" src="https://picsum.photos/400/500?random=1" alt="Spotlight Provider">
 </div>
-<div class="spotlight-label">Spotlight Presence</div>
+<div class="spotlight-label">Tonight's Spotlight Presence</div>
 <div class="spotlight-name" id="spotlightName">Aurelia</div>
 <div class="spotlight-city" id="spotlightCity">Miami</div>
 </div>
-<div class="loading-footer">Selected from today's Spotlight Gallery</div>
+<div class="loading-footer">Selected from the Level IX Spotlight Gallery</div>
 </div>
+
+<!-- MIDNIGHT MODE INDICATOR -->
+<div class="midnight-indicator" id="midnightIndicator">✦ The Midnight Gallery is now open ✦</div>
 
 <!-- GALLERY CONTENT -->
 <div class="gallery-section" id="gallerySection">
@@ -490,22 +556,93 @@ image: 'https://picsum.photos/400/500?random=3'
 name: 'Isabella',
 city: 'Paris',
 image: 'https://picsum.photos/400/500?random=4'
+},
+{
+name: 'Catalina',
+city: 'Barcelona',
+image: 'https://picsum.photos/400/500?random=5'
+},
+{
+name: 'Margot',
+city: 'Monaco',
+image: 'https://picsum.photos/400/500?random=6'
 }
 ];
 
-// Initialize loading screen with random spotlight
-function initLoadingScreen() {
-const randomIndex = Math.floor(Math.random() * spotlightProfiles.length);
-const selected = spotlightProfiles[randomIndex];
+let currentSpotlightIndex = 0;
+let rotationInterval;
 
-document.getElementById('spotlightImage').src = selected.image;
-document.getElementById('spotlightName').textContent = selected.name;
-document.getElementById('spotlightCity').textContent = selected.city;
+// Get random spotlight that's different from current
+function getNextSpotlight() {
+let nextIndex = Math.floor(Math.random() * spotlightProfiles.length);
+while (nextIndex === currentSpotlightIndex && spotlightProfiles.length > 1) {
+nextIndex = Math.floor(Math.random() * spotlightProfiles.length);
+}
+currentSpotlightIndex = nextIndex;
+return spotlightProfiles[nextIndex];
+}
 
-// Fade out loading screen after 3.5 seconds
+// Update spotlight display
+function updateSpotlight(profile) {
+const img = document.getElementById('spotlightImage');
+const name = document.getElementById('spotlightName');
+const city = document.getElementById('spotlightCity');
+
+// Fade out
+img.classList.remove('fade-in');
+img.classList.add('fade-out');
+
 setTimeout(() => {
+img.src = profile.image;
+name.textContent = profile.name;
+city.textContent = profile.city;
+
+// Fade in
+img.classList.remove('fade-out');
+img.classList.add('fade-in');
+}, 400);
+}
+
+// Rotate spotlights every 3 seconds during loading
+function startSpotlightRotation() {
+// Show initial spotlight
+updateSpotlight(getNextSpotlight());
+
+// Rotate every 3 seconds
+rotationInterval = setInterval(() => {
+updateSpotlight(getNextSpotlight());
+}, 3000);
+}
+
+// Check if it's midnight mode
+function isMidnightHour() {
+const now = new Date();
+return now.getHours() >= 0 && now.getHours() < 6;
+}
+
+// Apply midnight mode
+function applyMidnightMode() {
+const gallery = document.getElementById('gallerySection');
+const indicator = document.getElementById('midnightIndicator');
+
+if (isMidnightHour()) {
+gallery.classList.add('midnight-mode');
+setTimeout(() => {
+indicator.classList.add('show');
+}, 4000);
+}
+}
+
+// Initialize loading screen
+function initLoadingScreen() {
+startSpotlightRotation();
+
+// Fade out and show gallery after 3.5 seconds
+setTimeout(() => {
+clearInterval(rotationInterval);
 document.getElementById('loadingScreen').classList.add('fade-out');
 document.getElementById('gallerySection').classList.add('visible');
+applyMidnightMode();
 }, 3500);
 }
 
