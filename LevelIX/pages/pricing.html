@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Level IX — Pricing & Features</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body {
+background:#050505;
+color:#e0e0e0;
+font-family:'Cinzel',serif;
+}
+
+.header {
+padding:40px 60px;
+border-bottom:1px solid rgba(100,200,255,0.2);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo {
+font-size:24px;
+letter-spacing:3px;
+color:#e0e0e0;
+}
+
+.nav-links {
+display:flex;
+gap:30px;
+}
+
+.nav-links a {
+color:#c0c0c0;
+text-decoration:none;
+font-size:13px;
+letter-spacing:1px;
+text-transform:uppercase;
+transition:all 0.3s ease;
+}
+
+.nav-links a:hover {
+color:#64c8ff;
+text-shadow:0 0 10px rgba(100,200,255,0.3);
+}
+
+.container {
+max-width:1200px;
+margin:0 auto;
+padding:80px 60px;
+}
+
+/* HERO */
+.hero {
+text-align:center;
+margin-bottom:100px;
+}
+
+.hero-title {
+font-size:56px;
+letter-spacing:3px;
+color:#e0e0e0;
+margin-bottom:20px;
+}
+
+.hero-subtitle {
+font-size:18px;
+color:rgba(192,192,192,0.8);
+margin-bottom:15px;
+}
+
+.hero-description {
+font-size:14px;
+color:rgba(192,192,192,0.7);
+max-width:600px;
+margin:0 auto;
+line-height:1.8;
+}
+
+/* FEATURES SECTION */
+.features-section {
+margin-bottom:100px;
+}
+
+.section-title {
+font-size:32px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#e0e0e0;
+margin-bottom:50px;
+text-align:center;
+border-bottom:1px solid rgba(100,200,255,0.2);
+padding-bottom:30px;
+}
+
+.features-grid {
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:30px;
+}
+
+.feature-card {
+background:rgba(0,0,0,0.3);
+border:1px solid rgba(100,200,255,0.2);
+padding:40px 30px;
+text-align:center;
+transition:all 0.3s ease;
+}
+
+.feature-card:hover {
+border-color:rgba(100,200,255,0.6);
+box-shadow:0 0 20px rgba(100,200,255,0.15);
+}
+
+.feature-icon {
+font-size:48px;
+margin-bottom:20px;
+}
+
+.feature-title {
+font-size:18px;
+letter-spacing:1px;
+color:#e0e0e0;
+margin-bottom:15px;
+text-transform:uppercase;
+}
+
+.feature-description {
+font-size:13px;
+color:rgba(192,192,192,0.8);
+line-height:1.8;
+}
+
+/* PRICING SECTION */
+.pricing-section {
+margin-bottom:100px;
+}
+
+.pricing-grid {
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:30px;
+}
+
+.pricing-card {
+background:rgba(0,0,0,0.4);
+border:1px solid rgba(100,200,255,0.2);
+padding:50px 30px;
+text-align:center;
+transition:all 0.3s ease;
+position:relative;
+}
+
+.pricing-card:hover {
+border-color:rgba(100,200,255,0.6);
+box-shadow:0 0 25px rgba(100,200,255,0.2);
+}
+
+.pricing-card.featured {
+border-color:#64c8ff;
+background:rgba(100,200,255,0.05);
+transform:scale(1.05);
+}
+
+.pricing-tier {
+font-size:20px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#e0e0e0;
+margin-bottom:15px;
+}
+
+.pricing-price {
+font-size:48px;
+color:#64c8ff;
+font-weight:600;
+margin-bottom:10px;
+}
+
+.pricing-period {
+font-size:13px;
+color:rgba(192,192,192,0.6);
+margin-bottom:30px;
+}
+
+.pricing-features {
+list-style:none;
+text-align:left;
+margin-bottom:30px;
+}
+
+.pricing-features li {
+font-size:13px;
+color:rgba(192,192,192,0.8);
+padding:12px 0;
+border-bottom:0.5px solid rgba(100,200,255,0.1);
+}
+
+.pricing-features li:before {
+content:'✔ ';
+color:#64c8ff;
+margin-right:10px;
+}
+
+.pricing-btn {
+width:100%;
+padding:14px;
+border:1px solid #64c8ff;
+background:transparent;
+color:#64c8ff;
+text-transform:uppercase;
+letter-spacing:1px;
+font-family:'Cinzel',serif;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+.pricing-btn:hover {
+background:#64c8ff;
+color:#050505;
+}
+
+/* VERIFICATION SECTION */
+.verification-section {
+background:rgba(0,0,0,0.4);
+border:1px solid rgba(100,200,255,0.2);
+padding:60px 40px;
+margin-bottom:100px;
+}
+
+.verification-grid {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.verification-content h3 {
+font-size:28px;
+letter-spacing:2px;
+color:#e0e0e0;
+margin-bottom:20px;
+}
+
+.verification-content p {
+font-size:14px;
+color:rgba(192,192,192,0.8);
+line-height:1.8;
+margin-bottom:20px;
+}
+
+.verification-process {
+list-style:none;
+}
+
+.verification-process li {
+font-size:13px;
+color:rgba(192,192,192,0.8);
+margin:15px 0;
+padding-left:30px;
+position:relative;
+}
+
+.verification-process li:before {
+content:'→';
+position:absolute;
+left:0;
+color:#64c8ff;
+font-weight:bold;
+}
+
+.verification-icon {
+font-size:80px;
+text-align:center;
+}
+
+/* SHADOW WORK INFO */
+.shadow-work-section {
+background:linear-gradient(135deg, rgba(251,191,36,0.05), rgba(251,191,36,0.02));
+border-left:4px solid #fbbf24;
+padding:40px;
+margin-bottom:80px;
+}
+
+.shadow-work-title {
+font-size:20px;
+letter-spacing:2px;
+color:#fbbf24;
+text-transform:uppercase;
+margin-bottom:15px;
+}
+
+.shadow-work-description {
+font-size:14px;
+color:rgba(192,192,192,0.8);
+line-height:1.8;
+}
+
+.shadow-work-description strong {
+color:#e0e0e0;
+}
+
+/* CTA SECTION */
+.cta-section {
+text-align:center;
+padding:60px 40px;
+background:rgba(100,200,255,0.05);
+border:1px solid rgba(100,200,255,0.2);
+}
+
+.cta-title {
+font-size:32px;
+letter-spacing:2px;
+color:#e0e0e0;
+margin-bottom:20px;
+}
+
+.cta-description {
+font-size:14px;
+color:rgba(192,192,192,0.8);
+margin-bottom:30px;
+}
+
+.cta-btn {
+padding:16px 50px;
+border:1.5px solid #64c8ff;
+background:#64c8ff;
+color:#050505;
+text-transform:uppercase;
+letter-spacing:2px;
+font-family:'Cinzel',serif;
+font-size:14px;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+.cta-btn:hover {
+box-shadow:0 0 30px rgba(100,200,255,0.4);
+transform:translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width:1024px) {
+.features-grid,
+.pricing-grid {
+grid-template-columns:repeat(2, 1fr);
+}
+
+.verification-grid {
+grid-template-columns:1fr;
+}
+
+.pricing-card.featured {
+transform:scale(1);
+}
+}
+
+@media (max-width:768px) {
+.header {
+flex-direction:column;
+gap:20px;
+text-align:center;
+}
+
+.container {
+padding:40px 20px;
+}
+
+.features-grid,
+.pricing-grid {
+grid-template-columns:1fr;
+}
+
+.hero-title {
+font-size:32px;
+}
+
+.section-title {
+font-size:24px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<div class="logo">LEVEL IX</div>
+<div class="nav-links">
+<a href="/LevelIX/index.html">Home</a>
+<a href="/LevelIX/pages/gallery.html">Gallery</a>
+<a href="#pricing">Pricing</a>
+<a href="/LevelIX/pages/create.html">Join Now</a>
+</div>
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+<h1 class="hero-title">Pricing & Features</h1>
+<p class="hero-subtitle">Everything you need to build your presence</p>
+<p class="hero-description">
+Level IX is built on three pillars: authenticity, elegance, and opportunity. We believe that real presence deserves real recognition.
+</p>
+</div>
+
+<!-- FEATURES -->
+<div class="features-section">
+<h2 class="section-title">Why Level IX</h2>
+
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">🎬</div>
+<div class="feature-title">Real Verification</div>
+<div class="feature-description">
+Video-verified profiles only. We use AI to detect synthetic imagery, ensuring every face in our gallery is authentically real.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🌟</div>
+<div class="feature-title">72-Hour Opportunity</div>
+<div class="feature-description">
+New providers get three full days of free, unfiltered visibility. Plenty of time to be discovered and prove your value.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">👑</div>
+<div class="feature-title">Curated Community</div>
+<div class="feature-description">
+No spam, no artificial accounts, no noise. Level IX maintains a refined directory where quality truly stands out.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🎭</div>
+<div class="feature-title">Shadow Work System</div>
+<div class="feature-description">
+Listings don't disappear. After 72 hours, profiles enter Shadow Work — still visible but dimmed until renewed.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">✨</div>
+<div class="feature-title">Elite Spotlights</div>
+<div class="feature-description">
+Pay $20 for 48 hours of prominence. Appear first in galleries, on loading screens, featured places.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🔐</div>
+<div class="feature-title">Trust & Safety</div>
+<div class="feature-description">
+Real people only. Verified identities. AI-screened imagery. Your presence is protected and authentic.
+</div>
+</div>
+</div>
+</div>
+
+<!-- VERIFICATION DETAILS -->
+<div class="verification-section">
+<h2 class="section-title" style="text-align:left; border:none; margin-bottom:40px;">The Verification Ritual</h2>
+<div class="verification-grid">
+<div class="verification-content">
+<h3>Build Trust Through Reality</h3>
+<p>Verification videos prove you're real. A 12-second clip showing your face, your voice, your authentic presence.</p>
+<ul class="verification-process">
+<li>Record a simple 12-second introduction</li>
+<li>Upload to your profile ($1.99 per video)</li>
+<li>AI analyzes for authenticity signals</li>
+<li>Receive Video Verified badge</li>
+<li>profiles with videos rank higher in search</li>
+</ul>
+<p><strong>Why $1.99?</strong> The cost keeps the system serious. It deters artificial accounts while ensuring only genuine providers invest in verification.</p>
+</div>
+<div class="verification-icon">🎥</div>
+</div>
+</div>
+
+<!-- SHADOW WORK INFO -->
+<div class="shadow-work-section">
+<div class="shadow-work-title">The Shadow Work Phase</div>
+<div class="shadow-work-description">
+After your free 72-hour introduction period, your listing enters <strong>Shadow Work</strong>. Your profile image becomes a soft silhouette. Your name disappears. But visitors can still see you're here.
+<br><br>
+This gentle fade is not punishment — it's a reminder that presence has a season. You can:
+<br>• Choose a tier to renew immediately
+<br>• Purchase an Elite Spotlight to return to prominence
+<br>• Delete your listing if you wish
+<br><br>
+The system respects your time and rewards your commitment.
+</div>
+</div>
+
+<!-- PRICING -->
+<div class="features-section" id="pricing">
+<h2 class="section-title">Membership Tiers</h2>
+
+<div class="pricing-grid">
+
+<!-- THE STUDIO -->
+<div class="pricing-card">
+<div class="pricing-tier">The Studio</div>
+<div class="pricing-price">Free</div>
+<div class="pricing-period">First 72 hours</div>
+<ul class="pricing-features">
+<li>Basic profile listing</li>
+<li>Gallery visibility</li>
+<li>Up to 1 verification video</li>
+<li>Community access</li>
+</ul>
+<button class="pricing-btn" onclick="joinNow()">Get Started</button>
+</div>
+
+<!-- THE PENTHOUSE -->
+<div class="pricing-card featured">
+<div class="pricing-tier">The Penthouse</div>
+<div class="pricing-price">$29</div>
+<div class="pricing-period">Per month</div>
+<ul class="pricing-features">
+<li>Gold-border profile</li>
+<li>Featured in search</li>
+<li>Up to 3 verification videos</li>
+<li>Priority support</li>
+<li>Monthly homepage feature</li>
+</ul>
+<button class="pricing-btn" onclick="joinNow()">Choose Plan</button>
+</div>
+
+<!-- THE GLOBAL -->
+<div class="pricing-card">
+<div class="pricing-tier">The Global</div>
+<div class="pricing-price">$79</div>
+<div class="pricing-period">Per month</div>
+<ul class="pricing-features">
+<li>Multi-city visibility</li>
+<li>Touring calendar</li>
+<li>Unlimited verification videos</li>
+<li>VIP support</li>
+<li>Spotlight eligibility</li>
+</ul>
+<button class="pricing-btn" onclick="joinNow()">Choose Plan</button>
+</div>
+
+</div>
+
+<div style="margin-top:50px; text-align:center; font-size:14px; color:rgba(192,192,192,0.8);">
+<p><strong>Elite Spotlight:</strong> $20 for 48 hours — Available to all tiers</p>
+<p><strong>Verification Videos:</strong> $1.99 each — Build trust with real presence</p>
+</div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+<h2 class="cta-title">Ready to Build Your Presence?</h2>
+<p class="cta-description">
+Join Level IX today. Enjoy 72 hours of free visibility, then choose how you want to continue your journey.
+</p>
+<button class="cta-btn" onclick="goToCreate()">Create Your Profile</button>
+</div>
+
+</div>
+
+<script>
+
+function joinNow() {
+window.location.href = '/LevelIX/pages/create.html';
+}
+
+function goToCreate() {
+window.location.href = '/LevelIX/pages/create.html';
+}
+
+</script>
+
+</body>
+</html>
