@@ -481,7 +481,7 @@ Elite Spotlights
 <!-- MAIN GALLERY GRID -->
 <div class="grid">
 
-<div class="card">
+<div class="card" onclick="viewProfile('aurelia')">
 <img src="https://picsum.photos/300">
 <div class="card-info">
 <div class="name">Aurelia</div>
@@ -493,7 +493,7 @@ Elite Spotlights
 </div>
 </div>
 
-<div class="card">
+<div class="card" onclick="viewProfile('valentina')">
 <img src="https://picsum.photos/301">
 <div class="card-info">
 <div class="name">Valentina</div>
@@ -505,7 +505,7 @@ Elite Spotlights
 </div>
 </div>
 
-<div class="card">
+<div class="card" onclick="viewProfile('sophia')">
 <img src="https://picsum.photos/302">
 <div class="card-info">
 <div class="name">Sophia</div>
@@ -648,6 +648,11 @@ applyMidnightMode();
 
 // Run on page load
 window.addEventListener('DOMContentLoaded', initLoadingScreen);
+
+// Navigate to profile page
+function viewProfile(name) {
+window.location.href = `profile.html?name=${name}`;
+}
 
 </script>
 

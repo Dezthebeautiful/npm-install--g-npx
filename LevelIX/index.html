@@ -18,21 +18,33 @@ font-family:'Cinzel',serif;
 overflow:hidden;
 }
 
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(rgba(5,5,5,0.6), rgba(5,5,5,0.6)), 
-            url('https://images.unsplash.com/photo-1703939773649-f3f92533419e?w=1400&q=80') center/cover;
-background-attachment:fixed;
+.hero-section {
 position:relative;
+height:100vh;
+width:100%;
+background:linear-gradient(rgba(5,5,5,0.6), rgba(5,5,5,0.6)), 
+            url('https://images.unsplash.com/photo-1703939773649-f3f92533419e?w=1400&q=80') no-repeat center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#ffffff;
 overflow:hidden;
 }
 
-.hero::before {
+.hero-overlay {
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(5,5,5,0.4);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:1;
+}
+
+.hero-overlay::after {
 content:'';
 position:absolute;
 top:0;
@@ -44,8 +56,9 @@ pointer-events:none;
 }
 
 .hero-content {
-position:relative;
+text-align:center;
 z-index:2;
+position:relative;
 animation:fadeInUp 1.2s ease-out;
 }
 
@@ -60,21 +73,22 @@ transform:translateY(0);
 }
 }
 
-.logo{
+.hero-title {
 font-size:85px;
 letter-spacing:8px;
-color:#e0e0e0;
 font-weight:600;
-text-shadow:0 2px 20px rgba(100,200,255,0.3);
 margin-bottom:15px;
+color:#e0e0e0;
+text-shadow:0 2px 20px rgba(100,200,255,0.3);
 }
 
-.tagline{
+.hero-subtitle {
 font-size:18px;
-color:#b0b0b0;
-opacity:0.85;
-letter-spacing:1px;
+text-transform:uppercase;
+letter-spacing:2px;
 margin-bottom:50px;
+opacity:0.85;
+color:#b0b0b0;
 text-shadow:0 1px 10px rgba(0,0,0,0.5);
 }
 
@@ -85,23 +99,24 @@ justify-content:center;
 flex-wrap:wrap;
 }
 
-.btn{
+.hero-btn {
 padding:16px 40px;
 border:1.5px solid #c0c0c0;
 color:#c0c0c0;
 text-decoration:none;
-transition:all 0.4s ease;
-font-size:14px;
-letter-spacing:2px;
 text-transform:uppercase;
+letter-spacing:2px;
 font-family:'Cinzel',serif;
-cursor:pointer;
-position:relative;
+font-size:14px;
+transition:all 0.4s ease;
 background:rgba(0,0,0,0.2);
 backdrop-filter:blur(5px);
+cursor:pointer;
+position:relative;
+display:inline-block;
 }
 
-.btn::before {
+.hero-btn::before {
 content:'';
 position:absolute;
 inset:0;
@@ -110,7 +125,7 @@ opacity:0;
 transition:opacity 0.4s ease;
 }
 
-.btn:hover {
+.hero-btn:hover {
 background:#c0c0c0;
 color:#050505;
 box-shadow:0 0 25px rgba(100,200,255,0.4);
@@ -118,16 +133,8 @@ transform:translateY(-2px);
 border-color:#e0e0e0;
 }
 
-.btn:hover::before {
+.hero-btn:hover::before {
 opacity:1;
-}
-
-.btn:first-child:hover {
-background:#c0c0c0;
-}
-
-.btn:last-child:hover {
-background:#c0c0c0;
 }
 
 </style>
@@ -135,20 +142,18 @@ background:#c0c0c0;
 
 <body>
 
-<section class="hero">
+<header class="hero-section">
+<div class="hero-overlay">
 <div class="hero-content">
-<div class="logo">LEVEL IX</div>
-
-<div class="tagline">
-Elite Placement for Exceptional Presence
-</div>
-
+<h1 class="hero-title">LEVEL IX</h1>
+<p class="hero-subtitle">Elite Placement for Exceptional Presence</p>
 <div class="button-group">
-<a class="btn" href="pages/gallery.html">Enter Gallery</a>
-<a class="btn" href="#create">Create Your Presence</a>
+<a href="pages/gallery.html" class="hero-btn">Enter Gallery</a>
+<a href="#create" class="hero-btn">Create Your Presence</a>
 </div>
 </div>
-</section>
+</div>
+</header>
 
 </body>
 </html>

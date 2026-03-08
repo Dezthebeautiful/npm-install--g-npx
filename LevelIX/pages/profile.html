@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Level IX Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body {
+background:#050505;
+color:#e0e0e0;
+font-family:'Cinzel',serif;
+overflow-x:hidden;
+}
+
+/* HEADER / BACK BUTTON */
+.header {
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:100;
+padding:20px 40px;
+background:linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.back-btn {
+color:#c0c0c0;
+text-decoration:none;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+transition:all 0.3s ease;
+cursor:pointer;
+}
+
+.back-btn:hover {
+color:#e0e0e0;
+text-shadow:0 0 15px rgba(100,200,255,0.3);
+}
+
+/* CINEMATIC HERO */
+.hero-section {
+width:100%;
+height:70vh;
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+background:url('') no-repeat center/cover;
+}
+
+.hero-section::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(5,5,5,0.4);
+z-index:1;
+}
+
+.hero-section::after {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:radial-gradient(circle at 50% 50%, rgba(100,200,255,0.08) 0%, transparent 60%);
+z-index:1;
+pointer-events:none;
+}
+
+.hero-image {
+width:100%;
+height:100%;
+object-fit:cover;
+animation:heroZoom 0.8s ease-out;
+position:absolute;
+top:0;
+left:0;
+}
+
+@keyframes heroZoom {
+from {
+transform:scale(1.05);
+opacity:0.9;
+}
+to {
+transform:scale(1);
+opacity:1;
+}
+}
+
+.hero-silhouette.shadow-work {
+opacity:0.3;
+filter:blur(8px);
+}
+
+/* PROFILE INFO SECTION */
+.profile-section {
+padding:60px 80px;
+max-width:1000px;
+margin:0 auto;
+animation:fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+from {
+opacity:0;
+transform:translateY(30px);
+}
+to {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.profile-header {
+margin-bottom:50px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.profile-name {
+font-size:48px;
+letter-spacing:3px;
+color:#e0e0e0;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.profile-name.shadow-work {
+opacity:0;
+height:0;
+margin:0;
+}
+
+.verification-badges {
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.badge {
+display:flex;
+align-items:center;
+gap:6px;
+font-size:12px;
+color:rgba(192,192,192,0.8);
+border:0.5px solid rgba(192,192,192,0.4);
+padding:8px 12px;
+letter-spacing:1px;
+transition:all 0.3s ease;
+}
+
+.badge:hover {
+border-color:rgba(100,200,255,0.6);
+color:#e0e0e0;
+box-shadow:0 0 10px rgba(100,200,255,0.15);
+}
+
+.badge-checkmark {
+color:#64c8ff;
+font-size:10px;
+}
+
+.shadow-work-label {
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+background:rgba(0,0,0,0.7);
+color:rgba(192,192,192,0.8);
+padding:20px 40px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-size:16px;
+border:1px solid rgba(192,192,192,0.3);
+display:none;
+z-index:50;
+}
+
+.hero-section.shadow-work .shadow-work-label {
+display:block;
+}
+
+/* PERSONAL QUESTION */
+.personal-question {
+margin-bottom:50px;
+padding:30px;
+border-left:2px solid rgba(100,200,255,0.3);
+background:rgba(0,0,0,0.2);
+}
+
+.question-title {
+font-size:14px;
+letter-spacing:2px;
+color:rgba(192,192,192,0.6);
+text-transform:uppercase;
+margin-bottom:15px;
+}
+
+.question-text {
+font-size:18px;
+font-style:italic;
+color:#c0c0c0;
+margin-bottom:20px;
+}
+
+.question-answer {
+font-size:16px;
+color:#e0e0e0;
+line-height:1.6;
+}
+
+/* PRESENCE DETAILS */
+.presence-details {
+margin-bottom:60px;
+}
+
+.section-title {
+font-size:16px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:rgba(192,192,192,0.7);
+margin-bottom:30px;
+border-bottom:1px solid rgba(100,200,255,0.2);
+padding-bottom:15px;
+}
+
+.details-grid {
+display:grid;
+grid-template-columns:repeat(2, 1fr);
+gap:40px;
+}
+
+.detail-column {
+display:flex;
+flex-direction:column;
+}
+
+.detail-item {
+margin-bottom:30px;
+}
+
+.detail-label {
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:rgba(192,192,192,0.5);
+margin-bottom:8px;
+}
+
+.detail-value {
+font-size:16px;
+color:#e0e0e0;
+line-height:1.6;
+}
+
+.touring-schedule {
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.schedule-item {
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border:0.5px solid rgba(100,200,255,0.15);
+background:rgba(0,0,0,0.2);
+}
+
+.schedule-city {
+font-size:14px;
+color:#e0e0e0;
+}
+
+.schedule-date {
+font-size:12px;
+color:rgba(192,192,192,0.6);
+}
+
+.engagement-tags {
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.tag {
+display:inline-block;
+padding:8px 14px;
+border:0.5px solid rgba(100,200,255,0.3);
+color:rgba(192,192,192,0.8);
+font-size:12px;
+letter-spacing:1px;
+background:rgba(0,0,0,0.3);
+transition:all 0.3s ease;
+}
+
+.tag:hover {
+border-color:rgba(100,200,255,0.6);
+background:rgba(100,200,255,0.1);
+color:#e0e0e0;
+}
+
+/* VIDEO VERIFICATION */
+.video-verification {
+margin-bottom:60px;
+}
+
+.video-grid {
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:20px;
+}
+
+.video-thumbnail {
+position:relative;
+width:100%;
+aspect-ratio:1/1;
+background:#111;
+border:1px solid rgba(100,200,255,0.2);
+cursor:pointer;
+overflow:hidden;
+transition:all 0.3s ease;
+}
+
+.video-thumbnail:hover {
+border-color:rgba(100,200,255,0.6);
+box-shadow:0 0 20px rgba(100,200,255,0.2);
+}
+
+.video-placeholder {
+width:100%;
+height:100%;
+background:linear-gradient(135deg, rgba(100,200,255,0.1), rgba(100,200,255,0.05));
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+}
+
+.video-play-icon {
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+font-size:48px;
+opacity:0.6;
+transition:all 0.3s ease;
+}
+
+.video-thumbnail:hover .video-play-icon {
+opacity:1;
+transform:translate(-50%, -50%) scale(1.1);
+}
+
+.video-info {
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+background:rgba(0,0,0,0.8);
+padding:12px;
+transform:translateY(100%);
+transition:transform 0.3s ease;
+}
+
+.video-thumbnail:hover .video-info {
+transform:translateY(0);
+}
+
+.video-duration {
+font-size:12px;
+color:rgba(192,192,192,0.8);
+letter-spacing:1px;
+}
+
+.video-note {
+font-size:11px;
+color:rgba(192,192,192,0.6);
+margin-top:4px;
+}
+
+/* ENGAGEMENT BUTTON */
+.engagement-section {
+text-align:center;
+padding:40px;
+border-top:1px solid rgba(100,200,255,0.2);
+}
+
+.engagement-btn {
+padding:16px 50px;
+border:1.5px solid #c0c0c0;
+color:#c0c0c0;
+background:transparent;
+font-family:'Cinzel',serif;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+cursor:pointer;
+transition:all 0.4s ease;
+}
+
+.engagement-btn:hover {
+background:#c0c0c0;
+color:#050505;
+box-shadow:0 0 25px rgba(100,200,255,0.3);
+}
+
+.engagement-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
+}
+
+/* RESPONSIVE */
+@media (max-width:1024px) {
+.profile-section {
+padding:40px 40px;
+}
+
+.details-grid {
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.video-grid {
+grid-template-columns:repeat(2, 1fr);
+}
+}
+
+@media (max-width:768px) {
+.hero-section {
+height:50vh;
+}
+
+.profile-header {
+flex-direction:column;
+}
+
+.profile-section {
+padding:30px 20px;
+}
+
+.profile-name {
+font-size:32px;
+}
+
+.video-grid {
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<a class="back-btn" onclick="window.history.back()">← Back to Gallery</a>
+<div style="color:rgba(192,192,192,0.4); font-size:12px; letter-spacing:2px;">LEVEL IX</div>
+</div>
+
+<!-- CINEMATIC HERO -->
+<section class="hero-section" id="heroSection">
+<img class="hero-image" id="profileImage" src="" alt="Profile">
+<div class="hero-overlay"></div>
+<div class="shadow-work-label">Shadow Work</div>
+</section>
+
+<!-- PROFILE CONTENT -->
+<div class="profile-section">
+
+<!-- PROFILE HEADER -->
+<div class="profile-header">
+<div>
+<h1 class="profile-name" id="profileName">Name</h1>
+<div class="verification-badges" id="verificationBadges">
+<div class="badge">
+<span class="badge-checkmark">✔</span>
+Identity Verified
+</div>
+<div class="badge">
+<span class="badge-checkmark">✔</span>
+Video Presence
+</div>
+</div>
+</div>
+</div>
+
+<!-- PERSONAL QUESTION -->
+<div class="personal-question">
+<div class="question-title">A Personal Touch</div>
+<div class="question-text">"If one song could become your fantasy file… what would it be?"</div>
+<div class="question-answer" id="questionAnswer">Answer will appear here...</div>
+</div>
+
+<!-- PRESENCE DETAILS -->
+<div class="presence-details">
+<h2 class="section-title">Presence Details</h2>
+
+<div class="details-grid">
+
+<!-- LEFT COLUMN -->
+<div class="detail-column">
+
+<div class="detail-item">
+<div class="detail-label">Location</div>
+<div class="detail-value" id="location">Miami, Florida</div>
+</div>
+
+<div class="detail-item">
+<div class="detail-label">Availability Window</div>
+<div class="detail-value" id="availability">Available for bookings</div>
+</div>
+
+</div>
+
+<!-- RIGHT COLUMN -->
+<div class="detail-column">
+
+<div class="detail-item">
+<div class="detail-label">Touring Schedule</div>
+<div class="touring-schedule" id="touringSchedule">
+<div class="schedule-item">
+<span class="schedule-city">Miami</span>
+<span class="schedule-date">Jan - Feb</span>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- PREFERRED ENGAGEMENT STYLE -->
+<div class="presence-details">
+<h2 class="section-title">Engagement Style</h2>
+<div class="engagement-tags" id="engagementTags">
+<div class="tag">Champagne Evenings</div>
+<div class="tag">Private Conversation</div>
+<div class="tag">City Adventures</div>
+</div>
+</div>
+
+<!-- VIDEO VERIFICATION -->
+<div class="presence-details">
+<h2 class="section-title">Video Verification</h2>
+<div class="video-grid" id="videoGrid">
+<div class="video-thumbnail">
+<div class="video-placeholder">🎬</div>
+<div class="video-play-icon">▶</div>
+<div class="video-info">
+<div class="video-duration">12 seconds</div>
+<div class="video-note">Verified Presence</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ENGAGEMENT BUTTON -->
+<div class="engagement-section">
+<button class="engagement-btn" id="engagementBtn">Request Presence</button>
+</div>
+
+</div>
+
+<script>
+
+// Sample profile data
+const profileData = {
+aurelia: {
+name: 'Aurelia',
+city: 'Miami',
+image: 'https://picsum.photos/1200/800?random=1',
+verified: ['identity', 'video'],
+question: '"If one song could become your fantasy file… what would it be?"',
+answer: 'Unchained Melody — there\'s something about longing suspended in time. It\'s romantic without being obvious, timeless without feeling dated.',
+location: 'Miami, Florida',
+availability: 'Available for bookings',
+touring: [
+{ city: 'Miami', date: 'Jan - Feb' },
+{ city: 'Paris', date: 'Mar - Apr' }
+],
+engagement: ['Champagne Evenings', 'Private Conversation', 'City Adventures', 'Artistic Presence'],
+videos: 2,
+shadowWork: false
+},
+valentina: {
+name: 'Valentina',
+city: 'New York',
+image: 'https://picsum.photos/1200/800?random=2',
+verified: ['identity', 'video'],
+question: '"If one song could become your fantasy file… what would it be?"',
+answer: 'New York, New York — but the Lena Horne version. Sophisticated, assertive, unapologetic.',
+location: 'New York, New York',
+availability: 'Available for bookings',
+touring: [
+{ city: 'New York', date: 'Year-round' },
+{ city: 'Aspen', date: 'Dec - Jan' }
+],
+engagement: ['Private Conversation', 'Overnight Escapes', 'Exclusive Events'],
+videos: 3,
+shadowWork: false
+},
+sophia: {
+name: 'Sophia',
+city: 'Los Angeles',
+image: 'https://picsum.photos/1200/800?random=3',
+verified: ['identity'],
+question: '"If one song could become your fantasy file… what would it be?"',
+answer: 'Gravity by Sara Bareilles. It speaks to presence without pretense.',
+location: 'Los Angeles, California',
+availability: 'Available for bookings',
+touring: [
+{ city: 'Los Angeles', date: 'Jan - Mar' },
+{ city: 'San Francisco', date: 'Apr - May' }
+],
+engagement: ['Champagne Evenings', 'City Adventures'],
+videos: 1,
+shadowWork: false
+}
+};
+
+// Get profile name from URL
+function getProfileName() {
+const params = new URLSearchParams(window.location.search);
+return params.get('name') ? params.get('name').toLowerCase() : 'aurelia';
+}
+
+// Load profile
+function loadProfile() {
+const profileName = getProfileName();
+const profile = profileData[profileName];
+
+if (!profile) {
+document.body.innerHTML = '<div style="text-align:center; padding:100px; color:#c0c0c0;">Profile not found.</div>';
+return;
+}
+
+// Load basic info
+document.getElementById('profileImage').src = profile.image;
+document.getElementById('profileName').textContent = profile.name;
+document.getElementById('questionAnswer').textContent = profile.answer;
+document.getElementById('location').textContent = profile.location;
+document.getElementById('availability').textContent = profile.availability;
+
+// Load touring schedule
+const tourSchedule = document.getElementById('touringSchedule');
+tourSchedule.innerHTML = '';
+profile.touring.forEach(tour => {
+const item = document.createElement('div');
+item.className = 'schedule-item';
+item.innerHTML = `
+<span class="schedule-city">${tour.city}</span>
+<span class="schedule-date">${tour.date}</span>
+`;
+tourSchedule.appendChild(item);
+});
+
+// Load engagement tags
+const engagementTags = document.getElementById('engagementTags');
+engagementTags.innerHTML = '';
+profile.engagement.forEach(tag => {
+const tagEl = document.createElement('div');
+tagEl.className = 'tag';
+tagEl.textContent = tag;
+engagementTags.appendChild(tagEl);
+});
+
+// Load videos
+const videoGrid = document.getElementById('videoGrid');
+videoGrid.innerHTML = '';
+for (let i = 0; i < profile.videos; i++) {
+const video = document.createElement('div');
+video.className = 'video-thumbnail';
+video.innerHTML = `
+<div class="video-placeholder">🎬</div>
+<div class="video-play-icon">▶</div>
+<div class="video-info">
+<div class="video-duration">12 seconds</div>
+<div class="video-note">Verified Presence</div>
+</div>
+`;
+videoGrid.appendChild(video);
+}
+
+// Check shadow work (simulate 72-hour timer)
+if (profile.shadowWork) {
+document.getElementById('heroSection').classList.add('shadow-work');
+document.querySelector('.hero-image').classList.add('shadow-work');
+document.getElementById('profileName').classList.add('shadow-work');
+}
+
+// Update verification badges
+updateVerificationBadges(profile.verified);
+}
+
+// Update verification badges
+function updateVerificationBadges(verified) {
+const container = document.getElementById('verificationBadges');
+container.innerHTML = '';
+
+if (verified.includes('identity')) {
+const badge = document.createElement('div');
+badge.className = 'badge';
+badge.innerHTML = '<span class="badge-checkmark">✔</span>Identity Verified';
+container.appendChild(badge);
+}
+
+if (verified.includes('video')) {
+const badge = document.createElement('div');
+badge.className = 'badge';
+badge.innerHTML = '<span class="badge-checkmark">✔</span>Video Presence Verified';
+container.appendChild(badge);
+}
+
+if (verified.includes('gallery')) {
+const badge = document.createElement('div');
+badge.className = 'badge';
+badge.innerHTML = '<span class="badge-checkmark">✔</span>Gallery Authenticity';
+container.appendChild(badge);
+}
+}
+
+// Initialize on load
+window.addEventListener('DOMContentLoaded', loadProfile);
+
+</script>
+
+</body>
+</html>
