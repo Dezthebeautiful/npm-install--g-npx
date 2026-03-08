@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Level IX Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#050505;
+color:white;
+font-family:'Cinzel',serif;
+}
+
+/* LOADING SCREEN */
+.loading-screen {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#050505;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+opacity:1;
+transition:opacity 0.8s ease-out 2s;
+}
+
+.loading-screen.fade-out {
+opacity:0;
+pointer-events:none;
+}
+
+.loading-container {
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+max-width:600px;
+}
+
+.spotlight-frame {
+position:relative;
+width:300px;
+height:400px;
+margin-bottom:40px;
+border:2px solid rgba(192,192,192,0.4);
+padding:15px;
+background:rgba(0,0,0,0.3);
+overflow:hidden;
+box-shadow:inset 0 0 40px rgba(100,200,255,0.1), 0 0 50px rgba(100,200,255,0.15);
+}
+
+.spotlight-frame::before {
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:radial-gradient(circle, rgba(100,200,255,0.08) 0%, transparent 70%);
+animation:softGlow 6s ease-in-out infinite;
+}
+
+@keyframes softGlow {
+0%, 100% { transform:translateX(0) translateY(0); }
+50% { transform:translateX(20px) translateY(10px); }
+}
+
+.spotlight-image {
+width:100%;
+height:100%;
+object-fit:cover;
+animation:cinematicZoom 4s ease-out forwards;
+position:relative;
+z-index:2;
+}
+
+@keyframes cinematicZoom {
+from {
+transform:scale(1.1);
+opacity:0.7;
+}
+to {
+transform:scale(1);
+opacity:1;
+}
+}
+
+.spotlight-label {
+font-size:12px;
+letter-spacing:3px;
+color:rgba(192,192,192,0.6);
+text-transform:uppercase;
+margin-bottom:15px;
+animation:fadeInDown 1s ease-out 0.5s both;
+}
+
+.spotlight-name {
+font-size:32px;
+letter-spacing:2px;
+color:#e0e0e0;
+margin-bottom:5px;
+animation:fadeInUp 1s ease-out 0.7s both;
+}
+
+.spotlight-city {
+font-size:16px;
+color:rgba(176,176,176,0.7);
+letter-spacing:1px;
+animation:fadeInUp 1s ease-out 0.9s both;
+}
+
+.loading-footer {
+position:absolute;
+bottom:40px;
+font-size:13px;
+color:rgba(192,192,192,0.4);
+letter-spacing:1px;
+animation:fadeIn 1.5s ease-out 1.5s both;
+}
+
+@keyframes fadeInDown {
+from {
+opacity:0;
+transform:translateY(-20px);
+}
+to {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes fadeInUp {
+from {
+opacity:0;
+transform:translateY(20px);
+}
+to {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes fadeIn {
+from { opacity:0; }
+to { opacity:1; }
+}
+
+/* GALLERY CONTENT */
+.gallery-section {
+padding:60px 40px;
+opacity:0;
+transition:opacity 0.8s ease-out;
+}
+
+.gallery-section.visible {
+opacity:1;
+}
+
+.gallery-header {
+text-align:center;
+margin-bottom:60px;
+}
+
+.gallery-header h1 {
+font-size:48px;
+letter-spacing:3px;
+color:#e0e0e0;
+margin-bottom:10px;
+}
+
+.gallery-header .subtitle {
+font-size:14px;
+color:rgba(176,176,176,0.6);
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.spotlight-carousel {
+margin-bottom:80px;
+}
+
+.carousel-title {
+font-size:16px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:rgba(192,192,192,0.7);
+margin-bottom:30px;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.flame-icon {
+color:#ffa500;
+font-size:14px;
+}
+
+.carousel-container {
+display:grid;
+grid-template-columns:repeat(auto-scroll, minmax(200px, 1fr));
+gap:25px;
+overflow-x:auto;
+padding-bottom:20px;
+scroll-behavior:smooth;
+}
+
+.carousel-card {
+background:#111;
+border:1px solid rgba(100,200,255,0.2);
+padding:8px;
+transition:all 0.3s ease;
+cursor:pointer;
+position:relative;
+}
+
+.carousel-card:hover {
+border-color:rgba(100,200,255,0.5);
+box-shadow:0 0 20px rgba(100,200,255,0.25);
+}
+
+.carousel-card img {
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.carousel-card-info {
+padding:12px;
+}
+
+.carousel-card-name {
+font-size:14px;
+color:#e0e0e0;
+}
+
+.carousel-card-city {
+font-size:12px;
+color:rgba(176,176,176,0.6);
+}
+
+.spotlight-badge {
+position:absolute;
+top:10px;
+right:10px;
+background:rgba(255,165,0,0.2);
+border:1px solid rgba(255,165,0,0.4);
+padding:4px 8px;
+font-size:10px;
+color:#ffa500;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+/* MAIN GALLERY GRID */
+.grid {
+display:grid;
+grid-template-columns:repeat(4, 1fr);
+gap:20px;
+}
+
+.card {
+background:#111;
+border:1px solid #333;
+padding:10px;
+transition:all 0.3s ease;
+cursor:pointer;
+}
+
+.card:hover {
+border-color:rgba(100,200,255,0.4);
+box-shadow:0 0 15px rgba(100,200,255,0.15);
+}
+
+.card img {
+width:100%;
+}
+
+.card-info {
+padding:8px 0;
+}
+
+.name {
+font-size:16px;
+color:#e0e0e0;
+margin-bottom:4px;
+}
+
+.city {
+font-size:12px;
+color:rgba(176,176,176,0.6);
+}
+
+.verification-badges {
+display:flex;
+gap:6px;
+margin-top:8px;
+flex-wrap:wrap;
+}
+
+.badge {
+font-size:10px;
+color:rgba(192,192,192,0.7);
+padding:2px 6px;
+border:0.5px solid rgba(192,192,192,0.3);
+}
+
+.tier-indicator {
+font-size:10px;
+color:#ffa500;
+text-transform:uppercase;
+letter-spacing:0.5px;
+margin-top:6px;
+}
+
+@media (max-width:1024px) {
+.grid {
+grid-template-columns:repeat(3, 1fr);
+}
+}
+
+@media (max-width:768px) {
+.grid {
+grid-template-columns:repeat(2, 1fr);
+}
+.gallery-section {
+padding:40px 20px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADING SPLASH SCREEN -->
+<div class="loading-screen" id="loadingScreen">
+<div class="loading-container">
+<div class="spotlight-frame">
+<img class="spotlight-image" id="spotlightImage" src="https://picsum.photos/300/400" alt="Spotlight Provider">
+</div>
+<div class="spotlight-label">Spotlight Presence</div>
+<div class="spotlight-name" id="spotlightName">Aurelia</div>
+<div class="spotlight-city" id="spotlightCity">Miami</div>
+</div>
+<div class="loading-footer">Selected from today's Spotlight Gallery</div>
+</div>
+
+<!-- GALLERY CONTENT -->
+<div class="gallery-section" id="gallerySection">
+
+<div class="gallery-header">
+<h1>Level IX Gallery</h1>
+<div class="subtitle">Elite Presence Curated</div>
+</div>
+
+<!-- ELITE SPOTLIGHTS CAROUSEL -->
+<div class="spotlight-carousel">
+<div class="carousel-title">
+<span class="flame-icon">🔥</span>
+Elite Spotlights
+</div>
+<div class="carousel-container">
+
+<div class="carousel-card">
+<div class="spotlight-badge">LIVE</div>
+<img src="https://picsum.photos/300">
+<div class="carousel-card-info">
+<div class="carousel-card-name">Aurelia</div>
+<div class="carousel-card-city">Miami</div>
+</div>
+</div>
+
+<div class="carousel-card">
+<div class="spotlight-badge">LIVE</div>
+<img src="https://picsum.photos/301">
+<div class="carousel-card-info">
+<div class="carousel-card-name">Valentina</div>
+<div class="carousel-card-city">New York</div>
+</div>
+</div>
+
+<div class="carousel-card">
+<div class="spotlight-badge">LIVE</div>
+<img src="https://picsum.photos/302">
+<div class="carousel-card-info">
+<div class="carousel-card-name">Sophia</div>
+<div class="carousel-card-city">Los Angeles</div>
+</div>
+</div>
+
+<div class="carousel-card">
+<div class="spotlight-badge">LIVE</div>
+<img src="https://picsum.photos/303">
+<div class="carousel-card-info">
+<div class="carousel-card-name">Isabella</div>
+<div class="carousel-card-city">Paris</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- MAIN GALLERY GRID -->
+<div class="grid">
+
+<div class="card">
+<img src="https://picsum.photos/300">
+<div class="card-info">
+<div class="name">Aurelia</div>
+<div class="city">Miami</div>
+<div class="verification-badges">
+<span class="badge">✔ Verified</span>
+</div>
+<div class="tier-indicator">Premium</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/301">
+<div class="card-info">
+<div class="name">Valentina</div>
+<div class="city">New York</div>
+<div class="verification-badges">
+<span class="badge">✔ Verified</span>
+</div>
+<div class="tier-indicator">Premium</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/302">
+<div class="card-info">
+<div class="name">Sophia</div>
+<div class="city">Los Angeles</div>
+<div class="verification-badges">
+<span class="badge">✔ Verified</span>
+</div>
+<div class="tier-indicator">Premium</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/303">
+<div class="card-info">
+<div class="name">Isabella</div>
+<div class="city">Paris</div>
+<div class="verification-badges">
+<span class="badge">✔ Verified</span>
+</div>
+<div class="tier-indicator">Gold</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Spotlight profiles data
+const spotlightProfiles = [
+{
+name: 'Aurelia',
+city: 'Miami',
+image: 'https://picsum.photos/400/500?random=1'
+},
+{
+name: 'Valentina',
+city: 'New York',
+image: 'https://picsum.photos/400/500?random=2'
+},
+{
+name: 'Sophia',
+city: 'Los Angeles',
+image: 'https://picsum.photos/400/500?random=3'
+},
+{
+name: 'Isabella',
+city: 'Paris',
+image: 'https://picsum.photos/400/500?random=4'
+}
+];
+
+// Initialize loading screen with random spotlight
+function initLoadingScreen() {
+const randomIndex = Math.floor(Math.random() * spotlightProfiles.length);
+const selected = spotlightProfiles[randomIndex];
+
+document.getElementById('spotlightImage').src = selected.image;
+document.getElementById('spotlightName').textContent = selected.name;
+document.getElementById('spotlightCity').textContent = selected.city;
+
+// Fade out loading screen after 3.5 seconds
+setTimeout(() => {
+document.getElementById('loadingScreen').classList.add('fade-out');
+document.getElementById('gallerySection').classList.add('visible');
+}, 3500);
+}
+
+// Run on page load
+window.addEventListener('DOMContentLoaded', initLoadingScreen);
+
+</script>
+
+</body>
+</html>

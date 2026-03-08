@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Level IX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Cinzel',serif;
+overflow:hidden;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(rgba(5,5,5,0.6), rgba(5,5,5,0.6)), 
+            url('https://images.unsplash.com/photo-1703939773649-f3f92533419e?w=1400&q=80') center/cover;
+background-attachment:fixed;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before {
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:radial-gradient(circle at 50% 50%, rgba(100,200,255,0.08) 0%, transparent 60%);
+pointer-events:none;
+}
+
+.hero-content {
+position:relative;
+z-index:2;
+animation:fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+from {
+opacity:0;
+transform:translateY(30px);
+}
+to {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.logo{
+font-size:85px;
+letter-spacing:8px;
+color:#e0e0e0;
+font-weight:600;
+text-shadow:0 2px 20px rgba(100,200,255,0.3);
+margin-bottom:15px;
+}
+
+.tagline{
+font-size:18px;
+color:#b0b0b0;
+opacity:0.85;
+letter-spacing:1px;
+margin-bottom:50px;
+text-shadow:0 1px 10px rgba(0,0,0,0.5);
+}
+
+.button-group {
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 40px;
+border:1.5px solid #c0c0c0;
+color:#c0c0c0;
+text-decoration:none;
+transition:all 0.4s ease;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-family:'Cinzel',serif;
+cursor:pointer;
+position:relative;
+background:rgba(0,0,0,0.2);
+backdrop-filter:blur(5px);
+}
+
+.btn::before {
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(45deg, rgba(100,200,255,0.1), transparent);
+opacity:0;
+transition:opacity 0.4s ease;
+}
+
+.btn:hover {
+background:#c0c0c0;
+color:#050505;
+box-shadow:0 0 25px rgba(100,200,255,0.4);
+transform:translateY(-2px);
+border-color:#e0e0e0;
+}
+
+.btn:hover::before {
+opacity:1;
+}
+
+.btn:first-child:hover {
+background:#c0c0c0;
+}
+
+.btn:last-child:hover {
+background:#c0c0c0;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<div class="hero-content">
+<div class="logo">LEVEL IX</div>
+
+<div class="tagline">
+Elite Placement for Exceptional Presence
+</div>
+
+<div class="button-group">
+<a class="btn" href="pages/gallery.html">Enter Gallery</a>
+<a class="btn" href="#create">Create Your Presence</a>
+</div>
+</div>
+</section>
+
+</body>
+</html>
